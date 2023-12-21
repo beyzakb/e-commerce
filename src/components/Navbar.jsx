@@ -21,7 +21,7 @@ const Navbar = () => {
     }
   },[color])
   return (
-    <div className='flex items-center justify-between px-2 py-5 h-30' >
+    <div className='flex items-center justify-between px-2 py-5 h-30 ' >
       <div><FiShoppingBag  size={30} className='cursor-pointer'/></div>
       <div className='flex items-center space-x-5'>
         <input className='border p-2 outline-none rounded-md' type="text" placeholder='  search' />

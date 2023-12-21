@@ -1,7 +1,12 @@
-
-
 export const productsAction = () => async (dispatch) => {
-    const data = fetch('https://fakestoreapi.com/products')
-    .then(res=>res.json())
-    dispatch({type:"GET_PRODUCTS", payload:data})
-}
+    try {
+      const response = await fetch('https://fakestoreapi.com/products');
+      const data = await response.json();
+      
+      // dispatch işlemi async olarak gerçekleştirilmelidir.
+      dispatch({ type: "GET_PRODUCTS", payload: data });
+    } catch (error) {
+      console.error('Error fetching products:', error);
+    }
+  };
+  
