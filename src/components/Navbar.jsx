@@ -3,6 +3,7 @@ import { MdOutlineDarkMode,MdDarkMode  } from "react-icons/md";
 import { LuShoppingBasket } from "react-icons/lu";
 import { FiShoppingBag } from "react-icons/fi";
 import { useDispatch, useSelector } from 'react-redux';
+import { searchAction } from '../redux/actions/search';
 
 
 
@@ -10,6 +11,7 @@ const Navbar = () => {
   const [color,setColor] = useState(false);
   const dispatch = useDispatch();
   const {cardItems} = useSelector(state=>state.card);
+  const [search,setSearch] = useState("")
 
   useEffect(()=>{
     const root = document.getElementById("root");
@@ -21,11 +23,19 @@ const Navbar = () => {
       root.style.color='black';
     }
   },[color])
+
+  const searchPost = (e) =>{
+    if(e.key === 'Enter'){
+      dispatch(searchAction(search))
+      
+    }
+  }
+
   return (
     <div className='flex items-center justify-between px-2 py-5 h-30 ' >
       <div><FiShoppingBag  size={30} className='cursor-pointer'/></div>
       <div className='flex items-center space-x-5'>
-        <input className='border p-2 outline-none rounded-md' type="text" placeholder='  search' />
+        <input value={search} onKeyPress={searchPost} onChange={e=>setSearch(e.target.value)} className='border p-2 outline-none rounded-md' type="text" placeholder='  search' />
         <div onClick={()=>setColor(!color)}>
           {
             color ? 
