@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { MdOutlineDarkMode,MdDarkMode  } from "react-icons/md";
 import { LuShoppingBasket } from "react-icons/lu";
 import { FiShoppingBag } from "react-icons/fi";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 
 const Navbar = () => {
   const [color,setColor] = useState(false);
   const dispatch = useDispatch();
+  const {cardItems} = useSelector(state=>state.card);
 
   useEffect(()=>{
     const root = document.getElementById("root");
@@ -35,7 +36,7 @@ const Navbar = () => {
         </div>
         <div onClick={()=>dispatch({type:"DRAWER", payload:true})} className='relative'>
         <LuShoppingBasket size={24} className='cursor-pointer'/>
-        <span className='absolute -top-2 -right-3 px-2 bg-orange-300 text-white rounded-full text-sm'>3</span>
+        <span className='absolute -top-2 -right-3 px-2 bg-orange-300 text-white rounded-full text-sm'>{cardItems?.length}</span>
         </div>
       </div>
 

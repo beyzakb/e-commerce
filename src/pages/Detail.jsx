@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom'
 import { productsActionDetail } from '../redux/actions/products';
+import { productsCard } from '../redux/actions/card';
 import { CgMathPlus, CgMathMinus  } from "react-icons/cg";
 
 const Detail = () => {
@@ -31,6 +32,12 @@ const Detail = () => {
       setCount(count - 1)
     }
   }
+
+  const addCard = () =>{
+    dispatch(productsCard(id,count))
+    dispatch({type:'DRAWER', payload:true})
+  }
+
   return (
     <div className='w-full flex  items-center justify-center space-x-5'>
       <img className='w-1/3' src={product?.image} alt="" />
@@ -47,7 +54,7 @@ const Detail = () => {
         <CgMathPlus onClick={()=>increment(product?.rating?.count)} className='cursor-pointer border rounded-full p-1 text-orange-500 ' size={34} />
 
         </div>
-        <button className='hover:bg-indigo-500 bg-orange-600 w-full p-3 rounded-lg text-center text- lg text-white'>Sepete Ekle</button>
+        <button onClick={addCard} className='hover:bg-indigo-500 bg-orange-600 w-full p-3 rounded-lg text-center text- lg text-white'>Sepete Ekle</button>
       </div>
 
     </div>
